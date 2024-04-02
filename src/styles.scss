@@ -64,6 +64,24 @@
                 font-weight: bold;
                 border: none;
                 cursor: pointer;
+
+                .spinner{
+                    width: 10px;
+                    height: 10px;
+                    border-radius: 50%;
+                    border: 5px solid rgba(0, 0, 0, 0.1);
+                    border-top-color: white;
+                    animation: spin 1s ease-in-out infinite;
+                    margin: 0px auto;
+                }
+                @keyframes spin {
+                    0% {
+                        transform: rotate(0deg);
+                    }
+                    100% {
+                        transform: rotate(360deg);
+                    }
+                }
             }
 
             label{
