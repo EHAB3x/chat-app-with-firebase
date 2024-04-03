@@ -10,6 +10,7 @@ const Register = () => {
     const [err, setErr] = useState(false);
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
+
   
     const handleSubmit = async (e) => {
       setLoading(true);
@@ -21,15 +22,13 @@ const Register = () => {
   
       try {
         //Create user
-        const res = await createUserWithEmailAndPassword(auth, email, password);
-        navigate("/");
-  
+        const res = await createUserWithEmailAndPassword(auth, email, password);       
         //Create a unique image name
         const date = new Date().getTime();
         const storageRef = ref(storage, `${displayName + date}`);
-  
+        
         await uploadBytesResumable(storageRef, file).then(() => {
-          getDownloadURL(storageRef).then(async (downloadURL) => {
+        getDownloadURL(storageRef).then(async (downloadURL) => {
             try {
               //Update profile
               await updateProfile(res.user, {
@@ -43,7 +42,7 @@ const Register = () => {
                 email,
                 photoURL: downloadURL,
               });
-  
+              
               //create empty user chats on firestore
               await setDoc(doc(db, "userChats", res.user.uid), {});
             } catch (err) {
@@ -51,6 +50,7 @@ const Register = () => {
               setErr(true);
               setLoading(false);
             }
+            navigate("/");
           });
         });
       } catch (err) {

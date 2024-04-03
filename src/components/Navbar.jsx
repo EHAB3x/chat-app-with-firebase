@@ -1,4 +1,3 @@
-import ProfilePic from "../assets/profile.jpg"
 import {signOut} from "firebase/auth"
 import { auth } from "../firebase"
 import { useContext } from "react"
