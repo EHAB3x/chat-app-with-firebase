@@ -13,11 +13,12 @@ const Input = () => {
   const [img, setImg] = useState(null);
   const { currentUser } = useContext(AuthContext);
   const { data } = useContext(ChatContext);
+  
 
   const handleSend = async () => {
     if (img) {
+      img.name.replace(/[^a-zA-Z0-9.]/g, "");
       const storageRef = ref(storage, uuid());
-
       const uploadTask = uploadBytesResumable(storageRef, img);
       
       uploadTask.on(
