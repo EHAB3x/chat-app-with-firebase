@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import Img from "../assets/img.png";
 import Attach from "../assets/attach.png";
 import { AuthContext } from "../context/AuthContext";
@@ -17,7 +17,7 @@ const Input = () => {
   const handleSend = async () => {
     if (img) {
       const storageRef = ref(storage, uuid());
-            
+
       const uploadTask = uploadBytesResumable(storageRef, img);
       
       uploadTask.on(

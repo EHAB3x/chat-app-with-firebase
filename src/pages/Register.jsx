@@ -9,6 +9,7 @@ import { useNavigate, Link } from "react-router-dom";
 const Register = () => {
   const [err, setErr] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [img, setImg] = useState(null);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -18,7 +19,6 @@ const Register = () => {
     const email = e.target[1].value;
     const password = e.target[2].value;
     const file = e.target[3].files[0];
-
     try {
       //Create user
       const res = await createUserWithEmailAndPassword(auth, email, password);
@@ -68,10 +68,20 @@ const Register = () => {
           <input required type="text" placeholder="display name" />
           <input required type="email" placeholder="email" />
           <input required type="password" placeholder="password" />
-          <input required style={{ display: "none" }} type="file" id="file" />
+
+          <input 
+            required 
+            style={{ display: "none" }} 
+            type="file" id="file" 
+            onChange={(e)=> setImg(e.target.files[0])}
+          />
+
           <label htmlFor="file">
-            <img src={Add} alt="" />
-            <span>Add an avatar</span>
+            <img 
+              src={img !== null ? URL.createObjectURL(img) : Add} 
+              alt="" 
+            />
+            <span>{img !== null ? img.name : "Add an avatar"}</span>
           </label>
           <button disabled={loading}>Sign up</button>
           {loading && <span>Uploading and compressing the image please wait...</span>}
