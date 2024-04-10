@@ -8,6 +8,7 @@ import { useNavigate, Link } from "react-router-dom";
 
 const Register = () => {
   const [err, setErr] = useState(false);
+  const [errMsg, setErrMsg] = useState("Something went wrong");
   const [loading, setLoading] = useState(false);
   const [img, setImg] = useState(null);
   const navigate = useNavigate();
@@ -54,8 +55,10 @@ const Register = () => {
         });
       });
     } catch (err) {
+      const msg = err.message;
       setErr(true);
       setLoading(false);
+      setErrMsg(msg.slice(msg.indexOf("/") +1 , msg.indexOf(")")));
     }
   };
 
@@ -85,7 +88,7 @@ const Register = () => {
           </label>
           <button disabled={loading}>Sign up</button>
           {loading && <span>Uploading and compressing the image please wait...</span>}
-          {err && <span>Something went wrong</span>}
+          {err && <span>{errMsg}</span>}
         </form>
         <p>
           You do have an account? <Link to="/login">Login</Link>
