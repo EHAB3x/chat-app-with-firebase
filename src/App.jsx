@@ -1,4 +1,4 @@
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
+import { HashRouter, Navigate, Route, Routes } from 'react-router-dom'
 import Home from './pages/Home'
 import Login from './pages/Login'
 import Register from './pages/Register'
@@ -17,7 +17,7 @@ const ProtectedRoute = ({children})=>{
   }
 }
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         <Route index element={
           <ProtectedRoute>
@@ -27,7 +27,7 @@ const ProtectedRoute = ({children})=>{
         <Route path="/login" element={<Login />}/>
         <Route path='/register' element={<Register />}/>
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   )
 }
 
