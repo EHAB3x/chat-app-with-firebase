@@ -10,16 +10,15 @@ const Register = () => {
   const [err, setErr] = useState(false);
   const [errMsg, setErrMsg] = useState("Something went wrong");
   const [loading, setLoading] = useState(false);
+  const [displayName, setDisplayName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [img, setImg] = useState(null);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     setLoading(true);
     e.preventDefault();
-    const displayName = e.target[0].value;
-    const email = e.target[1].value;
-    const password = e.target[2].value;
-    const file = e.target[3].files[0];
     try {
       //Create user
       const res = await createUserWithEmailAndPassword(auth, email, password);
@@ -28,7 +27,7 @@ const Register = () => {
       const date = new Date().getTime();
       const storageRef = ref(storage, `${displayName + date}`);
 
-      await uploadBytesResumable(storageRef, file).then(() => {
+      await uploadBytesResumable(storageRef, img).then(() => {
         getDownloadURL(storageRef).then(async (downloadURL) => {
           try {
             //Update profile
@@ -68,9 +67,26 @@ const Register = () => {
         <span className="logo">Lama Chat</span>
         <span className="title">Register</span>
         <form onSubmit={handleSubmit}>
-          <input required type="text" placeholder="display name" />
-          <input required type="email" placeholder="email" />
-          <input required type="password" placeholder="password" />
+          <input
+           required 
+           type="text" 
+           placeholder="display name" 
+           onChange={(e)=> setDisplayName(e.target.value)}
+          />
+
+          <input
+           required 
+           type="email" 
+           placeholder="email" 
+           onChange={(e)=> setEmail(e.target.value)}
+          />
+
+          <input
+           required 
+           type="password" 
+           placeholder="password" 
+           onChange={(e)=> setPassword(e.target.value)}
+          />
 
           <input 
             required 
