@@ -38,7 +38,10 @@
       flex-direction: column;
       gap: 10px;
       align-items: center;
-  
+      
+      @include mobile{
+        width: 60%;
+      }
       .logo {
         color: $main-color;
         font-weight: bold;
@@ -55,11 +58,13 @@
         display: flex;
         flex-direction: column;
         gap: 15px;
+        justify-content: center;
+        align-items: center;
   
         input {
           padding: 15px;
           border: none;
-          width: 250px;
+          width: 100%;
           border-bottom: 1px solid $main-backgroundColor;
           &::placeholder {
             color: rgb(175, 175, 175);
@@ -73,6 +78,7 @@
           font-weight: bold;
           border: none;
           cursor: pointer;
+          width: 100%;
         }
   
         label {
