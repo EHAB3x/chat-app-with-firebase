@@ -8,6 +8,11 @@ const Message = ({ message }) => {
   const { data } = useContext(ChatContext);
   const ref = useRef();
 
+  const formatTime = (timestamp) => {
+    const date = new Date(timestamp * 1000);
+    return `${date.getHours() > 12 ? date.getHours() - 12 : date.getHours()}:${date.getMinutes()} ${date.getHours() > 12 ? "PM" : "AM"}`;
+  };
+
   useEffect(() => {
     ref.current?.scrollIntoView({ behavior: "smooth" });
   }, [message]);
@@ -26,7 +31,7 @@ const Message = ({ message }) => {
           }
           alt=""
         />
-        <span>just now</span>
+        <span>{formatTime(message.date.seconds)}</span>
       </div>
       <div className="messageContent">
         <p>{message.text}</p>
