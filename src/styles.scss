@@ -185,8 +185,8 @@
   
           .searchForm {
             padding: 10px;
-  
-            input {
+            display: flex;
+            input{
               background-color: transparent;
               border: none;
               color: $form_background;
@@ -195,6 +195,16 @@
               &::placeholder {
                 color: lightgray;
               }
+            }
+
+            input[type="submit"]{
+                background-color: $btn-background;
+                color: $form_background;
+                padding: 10px;
+                font-weight: bold;
+                border: none;
+                cursor: pointer;
+                width: 100%;
             }
           }
         }

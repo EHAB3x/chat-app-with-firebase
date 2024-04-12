@@ -19,7 +19,8 @@ const Search = () => {
 
   const { currentUser } = useContext(AuthContext);
 
-  const handleSearch = async () => {
+  const handleSearch = async (e) => {
+    e.preventDefault();
     const q = query(
       collection(db, "users"),
       where("displayName", "==", username)
@@ -33,10 +34,6 @@ const Search = () => {
     } catch (err) {
       setErr(true);
     }
-  };
-
-  const handleKey = (e) => {
-    e.code === "Enter" && handleSearch();
   };
 
   const handleSelect = async () => {
@@ -78,15 +75,15 @@ const Search = () => {
   };
   return (
     <div className="search">
-      <div className="searchForm">
+      <form className="searchForm">
         <input
           type="text"
           placeholder="Find a user"
-          onKeyDown={handleKey}
           onChange={(e) => setUsername(e.target.value)}
           value={username}
         />
-      </div>
+        <input type="submit" name="sub" id="sub" value="Search" onClick={handleSearch}/>
+      </form>
       {err && <span>User not found!</span>}
       {user && (
         <div className="userChat" onClick={handleSelect}>
