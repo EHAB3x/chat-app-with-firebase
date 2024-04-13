@@ -10,6 +10,11 @@ const Chats = () => {
   const { currentUser } = useContext(AuthContext);
   const { dispatch } = useContext(ChatContext);
 
+  const hideSidebar = ()=>{
+    let sidebar = document.querySelector(".sidebar");
+    console.log(sidebar);
+    sidebar.classList.toggle("show");
+  }
   useEffect(() => {
     const getChats = () => {
       const unsub = onSnapshot(doc(db, "userChats", currentUser.uid), (doc) => {
@@ -34,7 +39,10 @@ const Chats = () => {
         <div
           className="userChat"
           key={chat[0]}
-          onClick={() => handleSelect(chat[1].userInfo)}
+          onClick={() => {
+            handleSelect(chat[1].userInfo)
+            hideSidebar();
+          }}
         >
           <img src={chat[1].userInfo.photoURL} alt="" />
           <div className="userChatInfo">
