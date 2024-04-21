@@ -12,7 +12,7 @@ chat app to connect with your friends where u can send messages,images and docs.
   <li>uuid</li>
 </ul>
 
-<h2>Future Plance</h2>
+<h2>Future Plans</h2>
 <ul>
   <li>Use Real Time Communication "RTC" To add audion and video calls</li>
   <li>Users can create Groups and chat together</li>
