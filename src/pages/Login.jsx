@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
+import Swal from "sweetalert2";
 
 const Login = () => {
   const [err, setErr] = useState(false);
@@ -13,11 +14,44 @@ const Login = () => {
     const email = e.target[0].value;
     const password = e.target[1].value;
 
-    try {
-      await signInWithEmailAndPassword(auth, email, password);
-      navigate("/")
-    } catch (err) {
-      setErr(true);
+    if (email === '' || password === '') {
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.onmouseenter = Swal.stopTimer;
+          toast.onmouseleave = Swal.resumeTimer;
+        }
+      });
+      Toast.fire({
+        icon: "warning",
+        title: "Please fill all inputs!"
+      });
+    }else{
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        navigate("/")
+        const Toast = Swal.mixin({
+          toast: true,
+          position: "top-end",
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.onmouseenter = Swal.stopTimer;
+            toast.onmouseleave = Swal.resumeTimer;
+          }
+        });
+        Toast.fire({
+          icon: "success",
+          title: "Sign in Successfully!"
+        });
+      } catch (err) {
+        setErr(true);
+      }
     }
   };
   return (
