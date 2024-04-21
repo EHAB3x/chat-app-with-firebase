@@ -96,6 +96,11 @@
         color: $main-color;
         font-size: 12px;
         margin-top: 10px;
+        a{
+          color: $main-color;
+          text-decoration: none;
+          font-weight: bold;
+        }
       }
     }
   }

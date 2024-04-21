@@ -64,7 +64,7 @@ const Register = () => {
   return (
     <div className="formContainer">
       <div className="formWrapper">
-        <span className="logo">Lama Chat</span>
+        <span className="logo">Ihab Chat</span>
         <span className="title">Register</span>
         <form onSubmit={handleSubmit}>
           <input
@@ -106,7 +106,7 @@ const Register = () => {
           {loading && <span>Uploading and compressing the image please wait...</span>}
           {err && <span>{errMsg}</span>}
         </form>
-        <p>
+        <p className="have">
           You do have an account? <Link to="/login">Login</Link>
         </p>
       </div>
